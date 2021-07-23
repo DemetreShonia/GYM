@@ -20,9 +20,9 @@ namespace HappyBat
         [SerializeField] float maxLegsPoints;
         [SerializeField] float maxHandPoints;
 
-        float _legsPoints;
-        float _leftHandPoints;
-        float _rightHandPoints;
+        float _legsPoints; // SPEED
+        float _leftHandPoints; // POWER
+        float _rightHandPoints; // POWER
 
         public float legsPoints
         {

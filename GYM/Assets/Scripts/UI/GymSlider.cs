@@ -7,16 +7,17 @@ namespace HappyBat
 {
     public class GymSlider : MonoBehaviour
     {
+        [Header("Values")]
         [SerializeField] float _maxValue = 5000f;
+        [SerializeField] float _increaseStep = 50;
         [SerializeField] float _decreaseAmount = 200f;
         [SerializeField] int _rewardAmountPerBar = 5;
+
+        [Header("References")]
         [SerializeField] GymMachine _gymMachine;
+        [SerializeField] Image image;
 
-        public Actor actor;
-
-        public Image image;
         float _currentSliderPoints;
-        [SerializeField] float _increaseStep = 50;
 
 
         
