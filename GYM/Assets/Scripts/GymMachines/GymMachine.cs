@@ -8,34 +8,35 @@ namespace HappyBat
     {
         public abstract void Update();
 
-        [SerializeField] Transform actorSitPosT;
+        [SerializeField] Transform _actorSitPosT;
+        [SerializeField] WorkOutType _workOutType;
 
         public Actor currentActor;
         [HideInInspector] public float lastClickTime;
 
-        public int trainReward;
-
+        [SerializeField] int _trainRewardMultiplier;
 
         public void SitActorOnMe(Actor actor)
         {
             currentActor = actor;
-            actor.SitOn(actorSitPosT.position);
+            actor.SitOn(_actorSitPosT.position);
         }
         public virtual void Train(int reward)
         {
-            currentActor.UpdateGymPoints(reward);
+            currentActor.WorkOut(_workOutType, reward * _trainRewardMultiplier);
         }
-        public virtual int GiveMeRewardAmount()
-        {
-            var timePassedSinceLastClick = Time.time - lastClickTime;
 
-            float newTrainReward = trainReward / timePassedSinceLastClick;
+        //public virtual int GiveMeRewardAmount()
+        //{
+        //    var timePassedSinceLastClick = Time.time - lastClickTime;
 
-            lastClickTime = Time.time;
+        //    float newTrainReward = trainReward / timePassedSinceLastClick;
 
-            return Mathf.CeilToInt(newTrainReward);
+        //    lastClickTime = Time.time;
 
-        }
+        //    return Mathf.CeilToInt(newTrainReward);
+
+        //}
     }
 
 }

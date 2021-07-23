@@ -10,7 +10,7 @@ namespace HappyBat
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Train(GiveMeRewardAmount());
+                //Train(GiveMeRewardAmount());
             }
         }
     }
