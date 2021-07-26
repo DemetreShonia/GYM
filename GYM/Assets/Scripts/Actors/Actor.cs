@@ -19,10 +19,14 @@ namespace HappyBat
 
         [SerializeField] float maxLegsPoints;
         [SerializeField] float maxHandPoints;
+        [SerializeField] float maxStaminaPoints;
+        [SerializeField] float maxHealthPoints;
 
         float _legsPoints; // SPEED
         float _leftHandPoints; // POWER
         float _rightHandPoints; // POWER
+        float _staminaPoints; // Stamina
+        float _healthPoints; // sicocxle default 100 daakene!
 
         public float legsPoints
         {
@@ -72,6 +76,38 @@ namespace HappyBat
                     _rightHandPoints = value;
             }
         }
+        public float staminaPoints
+        {
+            get
+            {
+                return _staminaPoints;
+            }
+            set
+            {
+                if (value > maxStaminaPoints)
+                    _staminaPoints = maxStaminaPoints;
+                else if (value < 0)
+                    _staminaPoints = 0;
+                else
+                    _staminaPoints = value;
+            }
+        }
+        public float healthPoints
+        {
+            get
+            {
+                return _healthPoints;
+            }
+            set
+            {
+                if (value > maxHealthPoints)
+                    _healthPoints = maxHealthPoints;
+                else if (value < 0)
+                    _healthPoints = 0;
+                else
+                    _healthPoints = value;
+            }
+        }
 
         public float currentLegsPointsPercent
         {
@@ -104,6 +140,27 @@ namespace HappyBat
 
             }
         }
+        public float currentStaminaPercent
+        {
+            get
+            {
+                if (staminaPoints == 0)
+                    return 0;
+                else
+                    return staminaPoints / maxStaminaPoints;
+
+            }
+        }
+        public float currentHealthPercent  // es gvinda vabshe?
+        {
+            get
+            {
+                if (healthPoints == 0)
+                    return 0;
+                else
+                    return healthPoints / maxHealthPoints;
+            }
+        }
 
         #endregion
 
@@ -117,13 +174,20 @@ namespace HappyBat
             {
                 case WorkOutType.Legs:
                     legsPoints += amount;
-                    print(currentLegsPointsPercent);
                     break;
                 case WorkOutType.LeftHand:
                     leftHandPoints += amount;
                     break;
                 case WorkOutType.RightHand:
                     rightHandPoints += amount;
+                    break;
+                case WorkOutType.Stamina:
+                    staminaPoints += amount;
+                    break;
+                case WorkOutType.Health:
+                    print(healthPoints);
+                    healthPoints += amount;
+                    print(healthPoints);
                     break;
             }
         }

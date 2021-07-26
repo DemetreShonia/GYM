@@ -10,5 +10,14 @@ namespace HappyBat
 
             return rect1.Overlaps(rect2);
         }
+        public static Vector3 GetSignedEulerAngles(Vector3 angles)
+        {
+            Vector3 signedAngles = Vector3.zero;
+            for (int i = 0; i < 3; i++)
+            {
+                signedAngles[i] = (angles[i] + 180f) % 360f - 180f;
+            }
+            return signedAngles;
+        }
     }
 }

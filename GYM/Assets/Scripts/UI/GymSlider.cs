@@ -5,22 +5,17 @@ using UnityEngine.UI;
 
 namespace HappyBat
 {
-    public class GymSlider : MonoBehaviour
+    public class GymSlider : GymUiBase
     {
         [Header("Values")]
         [SerializeField] float _maxValue = 5000f;
         [SerializeField] float _increaseStep = 50;
         [SerializeField] float _decreaseAmount = 200f;
-        [SerializeField] int _rewardAmountPerBar = 5;
 
         [Header("References")]
-        [SerializeField] GymMachine _gymMachine;
         [SerializeField] Image image;
 
         float _currentSliderPoints;
-
-
-        
 
         // Update is called once per frame
         void Update()
@@ -51,7 +46,7 @@ namespace HappyBat
         {
             var currentFillPoints = (1 - image.fillAmount) * 10;
 
-            var reward = (int)(currentFillPoints * _rewardAmountPerBar);
+            var reward = (int)(currentFillPoints * rewardAmount);
 
             return reward;
         }

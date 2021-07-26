@@ -2,6 +2,6 @@ namespace HappyBat
 {
     public enum WorkOutType
     {
-        Legs, LeftHand, RightHand
+        Legs, LeftHand, RightHand, Stamina, Health
     }
 }

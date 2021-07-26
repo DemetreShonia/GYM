@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace HappyBat
 {
-    public class GymCatch : MonoBehaviour
+    public class GymCatchRect : GymUiBase
     {
         [Header("References")]
         [SerializeField] RectTransform _MovingImageRect;
