@@ -6,18 +6,23 @@ namespace HappyBat
 {
     public class CameraFollowPlayer : MonoBehaviour
     {
-        [Header("References")]
+        [SerializeField] float _moveSpeed;
         [SerializeField] Transform _targetT;
 
-        
         Vector3 _offset;
+
         private void Start()
         {
-            _offset = transform.position - _targetT.position;
+            _offset = _targetT.position - transform.position;
         }
-        void LateUpdate()
+        
+
+        private void Update()
         {
-            transform.position = _targetT.position + _offset;
+            if (_targetT != null)
+            {
+                transform.position = Vector3.Lerp(transform.position, _targetT.position - _offset, _moveSpeed * Time.deltaTime);
+            }
         }
     }
 }
