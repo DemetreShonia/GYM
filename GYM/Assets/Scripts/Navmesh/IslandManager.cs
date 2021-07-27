@@ -44,7 +44,6 @@ namespace HappyBat
                 _movingIslandNavMeshSurface.transform.position = new Vector3(_movingIslandPos.x, _movingIslandPos.y, 20f);
                 BuildBothNavMeshSurfaces();
             }
-            print(distOnZ);
         }
     }
 }
