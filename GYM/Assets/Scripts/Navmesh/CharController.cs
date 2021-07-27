@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class CharController : MonoBehaviour
 {
-    Vector3 inputValue;
+    Vector3 _inputValue;
     float inputSqrMagnitude;
     public float speed;
     NavMeshAgent _navMeshAgent;
@@ -18,13 +18,17 @@ public class CharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputValue.x = Input.GetAxis("Horizontal");
-        inputValue.z = Input.GetAxis("Vertical");
+        _inputValue.x = Input.GetAxis("Horizontal");
+        _inputValue.z = Input.GetAxis("Vertical");
         Step();
+    }
+    void LookAtMovingDir(Vector3 dir)
+    {
+        transform.rotation = Quaternion.LookRotation(dir);
     }
     void Step()
     {
-        inputSqrMagnitude = inputValue.sqrMagnitude;
+        inputSqrMagnitude = _inputValue.sqrMagnitude;
 
         if(inputSqrMagnitude >= .01f)
         {
@@ -37,9 +41,9 @@ public class CharController : MonoBehaviour
             forward.Normalize();
             right.Normalize();
 
-            var desiredDir = forward * inputValue.z + right * inputValue.x;
+            var desiredDir = forward * _inputValue.z + right * _inputValue.x;
             // move relative to camera
-
+            LookAtMovingDir(desiredDir);
 
             Vector3 newPos = transform.position + desiredDir * Time.deltaTime * speed;
             NavMeshHit hit;
@@ -49,11 +53,12 @@ public class CharController : MonoBehaviour
             {
                 if((transform.position - hit.position).magnitude >= 0.2f)
                 {
-                    _navMeshAgent.SetDestination(newPos);
+                    _navMeshAgent.Move(desiredDir * speed *Time.deltaTime);
                 }
             }
 
         }
+        
 
         
         
