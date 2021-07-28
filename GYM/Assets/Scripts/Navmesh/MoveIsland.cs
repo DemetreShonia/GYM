@@ -33,7 +33,10 @@ namespace HappyBat
         {
             for (int i = 0; i < _myNavMeshAgents.Length; i++)
             {
-                _myNavMeshAgents[i].Move(_moveDir * _moveSpeed * Time.deltaTime);
+                if (_myNavMeshAgents[i] != null && _myNavMeshAgents[i].enabled)
+                {
+                    _myNavMeshAgents[i].Move(_moveDir * _moveSpeed * Time.deltaTime);
+                }
             }
         }
         public void StopMoving()

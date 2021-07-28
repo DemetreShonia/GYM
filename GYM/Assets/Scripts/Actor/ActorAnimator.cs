@@ -38,6 +38,10 @@ namespace HappyBat
         {
             _animator.SetTrigger("WorkOut");
         }
+        public void WorkOutWithSlider(float fillAmount)
+        {
+            _animator.SetFloat("RunSpeed", fillAmount);
+        }
     }
 }
 

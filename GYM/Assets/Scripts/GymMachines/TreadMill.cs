@@ -8,9 +8,9 @@ namespace HappyBat
     {
         public override void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Train(GiveMeRewardAmount());
+            if (Input.GetKeyDown(KeyCode.K))
+            { 
+                StandActorFromMe();
             }
         }
     }

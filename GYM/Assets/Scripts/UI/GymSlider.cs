@@ -16,6 +16,10 @@ namespace HappyBat
         [SerializeField] Image image;
 
         float _currentSliderPoints;
+        private void Awake()
+        {
+            _gymMachine.uiInputGO = gameObject;
+        }
 
         // Update is called once per frame
         void Update()
@@ -23,6 +27,13 @@ namespace HappyBat
             CheckInput();
             CalculateCurrentSliderPoints();
             UpdateUI();
+        }
+        public float imagePercent
+        {
+            get
+            {
+                return _currentSliderPoints / _maxValue;
+            }
         }
         void UpdateUI()
         {

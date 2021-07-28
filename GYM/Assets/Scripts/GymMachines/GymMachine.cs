@@ -12,7 +12,7 @@ namespace HappyBat
         [SerializeField] Transform _actorStandPosT;
         [SerializeField] WorkOutType _workOutType;
 
-        public GameObject uiInputGO;
+        [HideInInspector] public GameObject uiInputGO;
 
         bool _amIAvailable = true;
 
@@ -38,7 +38,6 @@ namespace HappyBat
             actor.SitOn(_actorSitPosT, workOutId);
             IAmUnAvailable();
             uiInputGO.SetActive(true); // gamochndes UI
-            print(workOutId);
         }
         
         public void StandActorFromMe()

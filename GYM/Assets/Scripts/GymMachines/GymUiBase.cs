@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace HappyBat
     {
         public GymMachine _gymMachine;
         public int rewardAmount = 5;
-
     }
+        
 }
 

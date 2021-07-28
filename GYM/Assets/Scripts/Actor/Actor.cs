@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HappyBat
 {
@@ -9,12 +10,19 @@ namespace HappyBat
         ActorAnimator _actorAnimator;
         ActorMovement _actorMovement;
 
+        [SerializeField] GymSlider _gymSlider;
+
         #region Points
 
         [SerializeField] float maxLegsPoints;
         [SerializeField] float maxHandPoints;
         [SerializeField] float maxStaminaPoints;
         [SerializeField] float maxHealthPoints;
+
+        [SerializeField] Image legsPercentImage;
+        [SerializeField] Image handPercentImage;
+        [SerializeField] Image stamPercentImage;
+        [SerializeField] Image healPercentImage;
 
         float _legsPoints; // SPEED
         float _leftHandPoints; // POWER
@@ -162,6 +170,7 @@ namespace HappyBat
         {
             _actorAnimator = GetComponent<ActorAnimator>();
             _actorMovement = GetComponent<ActorMovement>();
+            SetFillAmountsToZero();
         }
         public void SitOn(Transform gymMachineT, int workOutId)
         {
@@ -174,8 +183,13 @@ namespace HappyBat
             transform.rotation = gymMachineT.rotation;
             transform.SetParent(gymMachineT);
 
-            print("s");
-
+        }
+        void SetFillAmountsToZero()
+        {
+           // legsPercentImage.fillAmount = 0;
+          //  handPercentImage.fillAmount = 0;
+         //   stamPercentImage.fillAmount = 0;
+            healPercentImage.fillAmount = 0;
         }
         public void StandUp(Vector3 newPos)
         {
@@ -190,6 +204,8 @@ namespace HappyBat
             _actorMovement.SitUpFromGymMachine(newPos);
 
         }
+        bool isOnTreadmill = false;
+        int _rewardAmount;
         public void WorkOut(WorkOutType workOutType, int amount)
         {
             switch (workOutType)
@@ -204,15 +220,35 @@ namespace HappyBat
                     rightHandPoints += amount;
                     break;
                 case WorkOutType.Stamina:
-                    staminaPoints += amount;
+                    isOnTreadmill = true;
+                    _rewardAmount = amount;
+
+                    staminaPoints += _rewardAmount;
+                    float animPercent = _gymSlider.imagePercent;
+
+                    _actorAnimator.WorkOutWithSlider(animPercent);
+
                     break;
                 case WorkOutType.Health:
                     healthPoints += amount;
                     _actorAnimator.WorkOut();
+                    healPercentImage.fillAmount = currentHealthPercent;
                     print(healthPoints);
                     break;
             }
+        
+            // tavisit ro qnas
+        //private void Update()
+        //{
+        //    if (isOnTreadmill)
+        //    {
+        //        staminaPoints += _rewardAmount;
+        //        float animPercent = _gymSlider.imagePercent;
+
+        //        _actorAnimator.WorkOutWithSlider(animPercent);
+        //    }
         }
+
     }
 
 }

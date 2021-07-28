@@ -23,11 +23,13 @@ namespace HappyBat
 
 
 
-
+        private void Awake()
+        {
+            _gymMachine.uiInputGO = gameObject;
+        }
         void Start()
         {
             RandomizeTargetPos();
-            _gymMachine.uiInputGO = gameObject;
         }
         IEnumerator ResetEveryThing(float delay)
         {
