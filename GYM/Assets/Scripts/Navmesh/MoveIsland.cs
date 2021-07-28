@@ -39,6 +39,7 @@ namespace HappyBat
         public void StopMoving()
         {
             _shouldMove = false;
+            Destroy(this);
         }
         
     }
