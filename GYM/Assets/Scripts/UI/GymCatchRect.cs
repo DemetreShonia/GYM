@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 namespace HappyBat
@@ -14,6 +15,8 @@ namespace HappyBat
         [Header("Values")]
         [SerializeField] float _MoveSpeed; //is witeli ragac rom dadis zemot qvemot
 
+        float _resetCounter;
+
 
         bool _isMovingUp = true; //is witeli ragac rom dadis zemot qvemot
         bool _shouldMove = true; //is witeli ragac rom dadis zemot qvemot
@@ -24,6 +27,13 @@ namespace HappyBat
         void Start()
         {
             RandomizeTargetPos();
+            _gymMachine.uiInputGO = gameObject;
+        }
+        IEnumerator ResetEveryThing(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            RandomizeTargetPos();
+            _shouldMove = true;
         }
 
         void Update()
@@ -32,19 +42,19 @@ namespace HappyBat
             {
                 TranslateMovingPart();
                 ChangeMovingPartDir();
+                CheckIfCaught();
             }
-            CheckIfCaught();
         }
 
         void TranslateMovingPart()
         {
             if (_isMovingUp)
             {
-                _MovingImageRect.transform.position += Vector3.up * _MoveSpeed * Time.deltaTime;
+                _MovingImageRect.transform.localPosition += (_upBorderT.localPosition - _MovingImageRect.localPosition).normalized * _MoveSpeed * Time.deltaTime;
             }
             else
             {
-                _MovingImageRect.transform.position += Vector3.down * _MoveSpeed * Time.deltaTime;
+                _MovingImageRect.transform.localPosition += (_downBorderT.localPosition - _MovingImageRect.localPosition).normalized * _MoveSpeed * Time.deltaTime;
             }
         }
         void ChangeMovingPartDir()
@@ -65,21 +75,24 @@ namespace HappyBat
         }
         void RandomizeTargetPos()
         {
-            var targetPos = _targetImageRect.transform.position;
+            Vector3 newPos = _downBorderT.localPosition.GetRandomVector3Between(_upBorderT.localPosition);
 
-            var randYPos = Random.Range(_downBorderT.position.y, _upBorderT.position.y);
-
-            Vector3 newPos = new Vector3(targetPos.x, randYPos, targetPos.z);
-
-            _targetImageRect.transform.position = newPos;
+            _targetImageRect.transform.localPosition = newPos ;
         }
+        
         void CheckIfCaught() // tu moartka ra
         {
+
             if (Input.GetMouseButtonDown(0))
             {
                 _shouldMove = false;
-                var t = _targetImageRect.CheckIfRectsOverlap(_MovingImageRect);
-                print(t);
+                var cought = _targetImageRect.CheckIfRectsOverlap(_MovingImageRect);
+
+                if (cought)
+                {
+                    _gymMachine.Train(rewardAmount);
+                }
+                StartCoroutine(ResetEveryThing(1f)); // 1 wami moicdis
             }
         }
     }

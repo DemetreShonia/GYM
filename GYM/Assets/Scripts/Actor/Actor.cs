@@ -207,8 +207,8 @@ namespace HappyBat
                     staminaPoints += amount;
                     break;
                 case WorkOutType.Health:
-                    print(healthPoints);
                     healthPoints += amount;
+                    _actorAnimator.WorkOut();
                     print(healthPoints);
                     break;
             }

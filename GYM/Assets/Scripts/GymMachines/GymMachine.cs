@@ -11,6 +11,9 @@ namespace HappyBat
         [SerializeField] Transform _actorSitPosT;
         [SerializeField] Transform _actorStandPosT;
         [SerializeField] WorkOutType _workOutType;
+
+        public GameObject uiInputGO;
+
         bool _amIAvailable = true;
 
         public int workOutId
@@ -25,12 +28,16 @@ namespace HappyBat
         [HideInInspector] public float lastClickTime;
 
         [SerializeField] int _trainRewardMultiplier;
-
+        private void Start()
+        {
+            uiInputGO.SetActive(false); // chaqres UI
+        }
         public void SitActorOnMe(Actor actor)
         {
             currentActor = actor;
             actor.SitOn(_actorSitPosT, workOutId);
             IAmUnAvailable();
+            uiInputGO.SetActive(true); // gamochndes UI
             print(workOutId);
         }
         
@@ -38,6 +45,7 @@ namespace HappyBat
         {
             currentActor.StandUp(_actorStandPosT.position);
             currentActor = null;
+            uiInputGO.SetActive(false); // chaqres UI
             Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
         }
         void IAmAvailable()

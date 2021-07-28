@@ -34,6 +34,10 @@ namespace HappyBat
         {
             _animator.SetTrigger("Stop");
         }
+        public void WorkOut()
+        {
+            _animator.SetTrigger("WorkOut");
+        }
     }
 }
 
