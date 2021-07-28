@@ -21,7 +21,7 @@ namespace HappyBat
 
         [SerializeField] Image legsPercentImage;
         [SerializeField] Image handPercentImage;
-        [SerializeField] Image stamPercentImage;
+        [SerializeField] Image staminaPercentImage;
         [SerializeField] Image healPercentImage;
 
         float _legsPoints; // SPEED
@@ -118,7 +118,7 @@ namespace HappyBat
                 if (legsPoints == 0)
                     return 0;
                 else
-                    return legsPoints / maxHandPoints;
+                    return legsPoints / maxLegsPoints;
             }
         }
         public float currentLeftHandPercent
@@ -186,9 +186,9 @@ namespace HappyBat
         }
         void SetFillAmountsToZero()
         {
-           // legsPercentImage.fillAmount = 0;
+           //legsPercentImage.fillAmount = 0;
           //  handPercentImage.fillAmount = 0;
-         //   stamPercentImage.fillAmount = 0;
+            staminaPercentImage.fillAmount = 0;
             healPercentImage.fillAmount = 0;
         }
         public void StandUp(Vector3 newPos)
@@ -220,13 +220,17 @@ namespace HappyBat
                     rightHandPoints += amount;
                     break;
                 case WorkOutType.Stamina:
+                    print(amount);
                     isOnTreadmill = true;
                     _rewardAmount = amount;
 
                     staminaPoints += _rewardAmount;
+                    staminaPercentImage.fillAmount = currentStaminaPercent;
+
                     float animPercent = _gymSlider.imagePercent;
 
-                    _actorAnimator.WorkOutWithSlider(animPercent);
+                    _actorAnimator.WorkOutWithSlider(animPercent); 
+
 
                     break;
                 case WorkOutType.Health:
