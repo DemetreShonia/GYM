@@ -7,6 +7,7 @@ namespace HappyBat
     public class Actor : MonoBehaviour
     {
         ActorAnimator _actorAnimator;
+        ActorMovement _actorMovement;
 
         #region Points
 
@@ -160,14 +161,33 @@ namespace HappyBat
         private void Start()
         {
             _actorAnimator = GetComponent<ActorAnimator>();
+            _actorMovement = GetComponent<ActorMovement>();
         }
-        public void SitOn(Vector3 position, int workOutId)
+        public void SitOn(Transform gymMachineT, int workOutId)
         {
             // aq animacia unda gaeshvas romeli?
             // jdomis poza ra
-            print("s");
-            _actorAnimator.TurnOnWorkOutPoseAnimation(workOutId);
+            _actorMovement.SitOnGymMachine();
+            _actorAnimator.PrepareForWorkOut(workOutId);
 
+            transform.position = gymMachineT.position;
+            transform.rotation = gymMachineT.rotation;
+            transform.SetParent(gymMachineT);
+
+            print("s");
+
+        }
+        public void StandUp(Vector3 newPos)
+        {
+            transform.SetParent(null);
+           // transform.position = position;
+
+            _actorMovement.enabled = true;
+
+            _actorAnimator.StopWorkOut();
+
+            //  _actorMovement.SitUpFromGymMachine(newPos);
+            _actorMovement.SitUpFromGymMachine(newPos);
 
         }
         public void WorkOut(WorkOutType workOutType, int amount)

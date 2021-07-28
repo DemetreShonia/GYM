@@ -9,7 +9,9 @@ namespace HappyBat
         public abstract void Update();
 
         [SerializeField] Transform _actorSitPosT;
+        [SerializeField] Transform _actorStandPosT;
         [SerializeField] WorkOutType _workOutType;
+        bool _amIAvailable = true;
 
         public int workOutId
         {
@@ -27,8 +29,24 @@ namespace HappyBat
         public void SitActorOnMe(Actor actor)
         {
             currentActor = actor;
-            actor.SitOn(_actorSitPosT.position, workOutId);
-            print(workOutId); ;
+            actor.SitOn(_actorSitPosT, workOutId);
+            IAmUnAvailable();
+            print(workOutId);
+        }
+        
+        public void StandActorFromMe()
+        {
+            currentActor.StandUp(_actorStandPosT.position);
+            currentActor = null;
+            Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
+        }
+        void IAmAvailable()
+        {
+            _amIAvailable = true;
+        }
+        void IAmUnAvailable()
+        {
+            _amIAvailable = false;
         }
         public virtual void Train(int reward)
         {
@@ -36,9 +54,13 @@ namespace HappyBat
         }
         public virtual void OnTriggerEnter(Collider other)
         {
-            var actor = other.GetComponent<Actor>();
-            if (actor != null)
-                SitActorOnMe(actor);
+            if (_amIAvailable)
+            {
+                var actor = other.GetComponent<Actor>();
+                if (actor != null)
+                    SitActorOnMe(actor);
+            }
+            
         }
 
         //public virtual int GiveMeRewardAmount()

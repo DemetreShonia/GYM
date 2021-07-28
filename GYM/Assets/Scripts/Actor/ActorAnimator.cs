@@ -25,10 +25,14 @@ namespace HappyBat
         {
             _animator.SetBool("IsMoving", _actorMovement.isMoving);
         }
-        public void TurnOnWorkOutPoseAnimation(int workOutId)
+        public void PrepareForWorkOut(int workOutId)
         {
             _animator.SetTrigger("SitOnMachine");
             _animator.SetInteger("WorkOutId", workOutId);
+        }
+        public void StopWorkOut()
+        {
+            _animator.SetTrigger("Stop");
         }
     }
 }

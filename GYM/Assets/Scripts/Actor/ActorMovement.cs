@@ -9,19 +9,39 @@ public class ActorMovement : MonoBehaviour
     float inputSqrMagnitude;
     public float speed;
     NavMeshAgent _navMeshAgent;
+    CapsuleCollider _capsuleCollider;
 
     public bool isMoving { get; private set; }
+    bool _shouldMove = true;
     // Start is called before the first frame update
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
-        Move();
+        if (_shouldMove)
+        {
+            CheckInput();
+            Move();
+        }
+    }
+    public void SitOnGymMachine()
+    {
+
+        _navMeshAgent.enabled = false;
+        _capsuleCollider.enabled = false;
+        _shouldMove = false;
+    }
+    public void SitUpFromGymMachine(Vector3 newPos)
+    {
+        _navMeshAgent.enabled = true;
+        _capsuleCollider.enabled = true;
+        var t= _navMeshAgent.Warp(newPos);
+        _shouldMove = true;
     }
     void CheckInput()
     {
