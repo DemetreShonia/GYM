@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HappyBat
 {
@@ -8,9 +9,11 @@ namespace HappyBat
     {
         public abstract void Update();
 
+        [Header("References")]
         [SerializeField] Transform _actorSitPosT;
         [SerializeField] Transform _actorStandPosT;
         [SerializeField] WorkOutType _workOutType;
+        [SerializeField] Button _stopWorkOutButton;
 
         [HideInInspector] public GameObject uiInputGO;
 
@@ -38,21 +41,28 @@ namespace HappyBat
             {
                 currentActor = actor;
                 actor.SitOn(_actorSitPosT, workOutId);
+                uiInputGO.SetActive(true); // gamochndes UI
                 uiInputGO.GetComponent<GymUiBase>().Reset();
                 IAmUnAvailable();
-                uiInputGO.SetActive(true); // gamochndes UI
+
+                _stopWorkOutButton.gameObject.SetActive(true);
+                _stopWorkOutButton.onClick.AddListener(StopWorkout);
+
             }
             
         }
         
-        public void StandActorFromMe()
+        public void StopWorkout()
         {
             if(currentActor != null)
             {
                 currentActor.StandUp(_actorStandPosT.position);
                 currentActor = null;
-                uiInputGO.GetComponent<GymUiBase>().Reset();
+           //     uiInputGO.GetComponent<GymUiBase>().Reset();
                 uiInputGO.SetActive(false); // chaqres UI
+
+                _stopWorkOutButton.onClick.RemoveListener(StopWorkout);
+                _stopWorkOutButton.gameObject.SetActive(false);
                 Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
             }
             

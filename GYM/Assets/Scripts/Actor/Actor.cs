@@ -249,28 +249,28 @@ namespace HappyBat
         {
             if (_isWorkingOut)
             {
-                //timer
-                _timer += Time.deltaTime;
-
-                if(_timer > _maxTime)
-                {
-                    staminaPoints += _rewardAmount;
-                    print(_rewardAmount);
-                    staminaPercentImage.fillAmount = currentStaminaPercent;
-                    _timer = 0;
-                }
-
-
                 switch (_workOutType)
                 {
                     case WorkOutType.Stamina:
-                        float animPercent = _gymSlider.imagePercent;
-
-                        _actorAnimator.WorkOutWithSlider(animPercent);
-
+                        UpdateStaminaWorkOut();
                         break;
                 }
                 
+            }
+        }
+        void UpdateStaminaWorkOut()
+        {
+            float animPercent = _gymSlider.imagePercent;
+
+            _actorAnimator.WorkOutWithSlider(animPercent);
+            _timer += Time.deltaTime;
+
+            if (_timer > _maxTime)
+            {
+                staminaPoints += _rewardAmount;
+                print(_rewardAmount);
+                staminaPercentImage.fillAmount = currentStaminaPercent;
+                _timer = 0;
             }
         }
     }

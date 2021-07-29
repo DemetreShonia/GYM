@@ -9,7 +9,7 @@ namespace HappyBat
         public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.K))
-                StandActorFromMe();
+                StopWorkout();
             
 
         }

@@ -11,6 +11,8 @@ public class ActorMovement : MonoBehaviour
     NavMeshAgent _navMeshAgent;
     CapsuleCollider _capsuleCollider;
 
+    [SerializeField] DynamicJoystick _dynamicJoystick;
+
     public bool isMoving { get; private set; }
     bool _shouldMove = true;
     // Start is called before the first frame update
@@ -45,8 +47,10 @@ public class ActorMovement : MonoBehaviour
     }
     void CheckInput()
     {
-        _inputValue.x = Input.GetAxis("Horizontal");
-        _inputValue.z = Input.GetAxis("Vertical");
+        //_inputValue.x = Input.GetAxis("Horizontal");
+        //_inputValue.z = Input.GetAxis("Vertical");
+        _inputValue.x = _dynamicJoystick.Direction.x;
+        _inputValue.z = _dynamicJoystick.Direction.y;
     }
     void LookAtMovingDir(Vector3 dir)
     {
