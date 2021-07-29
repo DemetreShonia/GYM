@@ -15,9 +15,6 @@ namespace HappyBat
         [Header("Values")]
         [SerializeField] float _MoveSpeed; //is witeli ragac rom dadis zemot qvemot
 
-        float _resetCounter;
-
-
         bool _isMovingUp = true; //is witeli ragac rom dadis zemot qvemot
         bool _shouldMove = true; //is witeli ragac rom dadis zemot qvemot
 
@@ -27,10 +24,7 @@ namespace HappyBat
         {
             _gymMachine.uiInputGO = gameObject;
         }
-        void Start()
-        {
-            RandomizeTargetPos();
-        }
+        
         IEnumerator ResetEveryThing(float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -39,7 +33,8 @@ namespace HappyBat
         }
         public override void Reset()
         {
-            StartCoroutine(ResetEveryThing(1f)); // 1 wami moicdis
+            if(gameObject.activeSelf && this.enabled)
+                StartCoroutine(ResetEveryThing(.2f)); // 1 wami moicdis
         }
 
         void Update()

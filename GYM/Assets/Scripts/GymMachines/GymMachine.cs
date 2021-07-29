@@ -34,19 +34,28 @@ namespace HappyBat
         }
         public void SitActorOnMe(Actor actor)
         {
-            currentActor = actor;
-            actor.SitOn(_actorSitPosT, workOutId);
-            IAmUnAvailable();
-            uiInputGO.SetActive(true); // gamochndes UI
+            if(currentActor == null)
+            {
+                currentActor = actor;
+                actor.SitOn(_actorSitPosT, workOutId);
+                uiInputGO.GetComponent<GymUiBase>().Reset();
+                IAmUnAvailable();
+                uiInputGO.SetActive(true); // gamochndes UI
+            }
+            
         }
         
         public void StandActorFromMe()
         {
-            currentActor.StandUp(_actorStandPosT.position);
-            currentActor = null;
-            uiInputGO.GetComponent<GymUiBase>().Reset();
-            uiInputGO.SetActive(false); // chaqres UI
-            Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
+            if(currentActor != null)
+            {
+                currentActor.StandUp(_actorStandPosT.position);
+                currentActor = null;
+                uiInputGO.GetComponent<GymUiBase>().Reset();
+                uiInputGO.SetActive(false); // chaqres UI
+                Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
+            }
+            
         }
         void IAmAvailable()
         {

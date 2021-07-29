@@ -10,6 +10,8 @@ namespace HappyBat
         {
             if (Input.GetKeyDown(KeyCode.K))
                 StandActorFromMe();
+            
+
         }
         
     }

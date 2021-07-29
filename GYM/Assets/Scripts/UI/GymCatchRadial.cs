@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 namespace HappyBat
@@ -19,12 +20,16 @@ namespace HappyBat
         bool _isRotatingRight = true; //is witeli ragac rom dadis zemot qvemot
         bool _shouldMove = true; //is witeli ragac rom dadis zemot qvemot
 
-
-
-
-        void Start()
+        IEnumerator ResetEveryThing(float delay)
         {
+            yield return new WaitForSeconds(delay);
             RandomizeTargetRot();
+            _shouldMove = true;
+        }
+        public override void Reset()
+        {
+            if (gameObject.activeSelf && this.enabled)
+                StartCoroutine(ResetEveryThing(.2f)); // 1 wami moicdis
         }
 
         void Update()
@@ -39,10 +44,6 @@ namespace HappyBat
             {
                 CheckIfCaught();
             }
-        }
-        public override void Reset()
-        {
-            // RESET LOGIC
         }
         void RotateMovingPart()
         {
