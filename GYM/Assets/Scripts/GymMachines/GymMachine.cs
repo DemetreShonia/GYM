@@ -44,6 +44,7 @@ namespace HappyBat
         {
             currentActor.StandUp(_actorStandPosT.position);
             currentActor = null;
+            uiInputGO.GetComponent<GymUiBase>().Reset();
             uiInputGO.SetActive(false); // chaqres UI
             Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
         }

@@ -16,6 +16,14 @@ namespace HappyBat
         [SerializeField] Image image;
 
         float _currentSliderPoints;
+        public float imagePercent
+        {
+            get
+            {
+                return _currentSliderPoints / _maxValue;
+            }
+        }
+
         private void Awake()
         {
             _gymMachine.uiInputGO = gameObject;
@@ -28,12 +36,9 @@ namespace HappyBat
             CalculateCurrentSliderPoints();
             UpdateUI();
         }
-        public float imagePercent
+        public override void Reset()
         {
-            get
-            {
-                return _currentSliderPoints / _maxValue;
-            }
+            _currentSliderPoints = 0;
         }
         void UpdateUI()
         {

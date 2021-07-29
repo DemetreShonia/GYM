@@ -1942,7 +1942,7 @@ MonoBehaviour:
   _gymSlider: {fileID: 564923130}
   maxLegsPoints: 100
   maxHandPoints: 100
-  maxStaminaPoints: 100
+  maxStaminaPoints: 2000
   maxHealthPoints: 100
   legsPercentImage: {fileID: 0}
   handPercentImage: {fileID: 0}
@@ -3013,39 +3013,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 857215065848550862, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15d06b7257f4be74c843564506d06d42, type: 3}

@@ -40,7 +40,10 @@ namespace HappyBat
                 CheckIfCaught();
             }
         }
-
+        public override void Reset()
+        {
+            // RESET LOGIC
+        }
         void RotateMovingPart()
         {
             if (_isRotatingRight)

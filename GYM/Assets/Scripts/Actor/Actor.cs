@@ -193,6 +193,7 @@ namespace HappyBat
         }
         public void StandUp(Vector3 newPos)
         {
+            _isWorkingOut = false;
             transform.SetParent(null);
            // transform.position = position;
 
@@ -203,11 +204,17 @@ namespace HappyBat
             //  _actorMovement.SitUpFromGymMachine(newPos);
             _actorMovement.SitUpFromGymMachine(newPos);
 
+            _actorAnimator.WorkOutWithSlider(0f);
+
         }
-        bool isOnTreadmill = false;
-        int _rewardAmount;
         public void WorkOut(WorkOutType workOutType, int amount)
         {
+            
+            _isWorkingOut = true;
+            _workOutType = workOutType;
+            _rewardAmount = amount;
+
+
             switch (workOutType)
             {
                 case WorkOutType.Legs:
@@ -220,18 +227,7 @@ namespace HappyBat
                     rightHandPoints += amount;
                     break;
                 case WorkOutType.Stamina:
-                    print(amount);
-                    isOnTreadmill = true;
-                    _rewardAmount = amount;
-
-                    staminaPoints += _rewardAmount;
-                    staminaPercentImage.fillAmount = currentStaminaPercent;
-
-                    float animPercent = _gymSlider.imagePercent;
-
-                    _actorAnimator.WorkOutWithSlider(animPercent); 
-
-
+                    // 
                     break;
                 case WorkOutType.Health:
                     healthPoints += amount;
@@ -240,19 +236,43 @@ namespace HappyBat
                     print(healthPoints);
                     break;
             }
-        
-            // tavisit ro qnas
-        //private void Update()
-        //{
-        //    if (isOnTreadmill)
-        //    {
-        //        staminaPoints += _rewardAmount;
-        //        float animPercent = _gymSlider.imagePercent;
-
-        //        _actorAnimator.WorkOutWithSlider(animPercent);
-        //    }
         }
 
+
+        int _rewardAmount;
+        bool _isWorkingOut = true;
+        WorkOutType _workOutType;
+        float _timer;
+        float _maxTime = 1f;
+
+        private void Update()
+        {
+            if (_isWorkingOut)
+            {
+                //timer
+                _timer += Time.deltaTime;
+
+                if(_timer > _maxTime)
+                {
+                    staminaPoints += _rewardAmount;
+                    print(_rewardAmount);
+                    staminaPercentImage.fillAmount = currentStaminaPercent;
+                    _timer = 0;
+                }
+
+
+                switch (_workOutType)
+                {
+                    case WorkOutType.Stamina:
+                        float animPercent = _gymSlider.imagePercent;
+
+                        _actorAnimator.WorkOutWithSlider(animPercent);
+
+                        break;
+                }
+                
+            }
+        }
     }
 
 }

@@ -37,6 +37,10 @@ namespace HappyBat
             RandomizeTargetPos();
             _shouldMove = true;
         }
+        public override void Reset()
+        {
+            StartCoroutine(ResetEveryThing(1f)); // 1 wami moicdis
+        }
 
         void Update()
         {
@@ -94,7 +98,7 @@ namespace HappyBat
                 {
                     _gymMachine.Train(rewardAmount);
                 }
-                StartCoroutine(ResetEveryThing(1f)); // 1 wami moicdis
+                Reset();
             }
         }
     }
