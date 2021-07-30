@@ -40,6 +40,11 @@ namespace HappyBat
         {
             _currentSliderPoints = 0;
         }
+
+        public override void SitOn()
+        {
+            _currentSliderPoints = 0;
+        }
         void UpdateUI()
         {
             image.fillAmount = 1 - (_currentSliderPoints / _maxValue);

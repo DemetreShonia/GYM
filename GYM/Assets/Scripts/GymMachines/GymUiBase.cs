@@ -10,6 +10,7 @@ namespace HappyBat
         public GymMachine _gymMachine;
         public int rewardAmount = 5;
         public abstract void Reset();
+        public abstract void SitOn();
     }
         
 }

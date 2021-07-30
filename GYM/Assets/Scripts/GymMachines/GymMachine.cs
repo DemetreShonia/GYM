@@ -20,7 +20,7 @@ namespace HappyBat
         [SerializeField] WorkOutType _workOutType;
         [SerializeField] int _trainRewardMultiplier;
 
-        bool _amIAvailable = true;
+        public bool amIAvailable { get; private set; }
 
         public int workOutId
         {
@@ -36,6 +36,7 @@ namespace HappyBat
         private void Start()
         {
             uiInputGO.SetActive(false); // chaqres UI
+            amIAvailable = true;
         }
         public void SitActorOnMe(Actor actor)
         {
@@ -46,7 +47,7 @@ namespace HappyBat
                     currentActor = actor;
                     actor.SitOn(_actorSitPosT, workOutId);
                     uiInputGO.SetActive(true); // gamochndes UI
-                    uiInputGO.GetComponent<GymUiBase>().Reset();
+                    uiInputGO.GetComponent<GymUiBase>().SitOn();
                     IAmUnAvailable();
 
                     _stopWorkOutButton.gameObject.SetActive(true);
@@ -75,11 +76,11 @@ namespace HappyBat
         }
         void IAmAvailable()
         {
-            _amIAvailable = true;
+            amIAvailable = true;
         }
         void IAmUnAvailable()
         {
-            _amIAvailable = false;
+            amIAvailable = false;
         }
         public virtual void Train(int reward)
         {
@@ -99,7 +100,7 @@ namespace HappyBat
         }
         public virtual void OnTriggerEnter(Collider other)
         {
-            if (_amIAvailable)
+            if (amIAvailable)
             {
                 var actor = other.GetComponent<Actor>();
                 if (actor != null)

@@ -60,6 +60,7 @@ namespace HappyBat
 
 
         public WorkOutData workOutData = new WorkOutData(); // new?
+        public bool isPlayer;
 
         #region Points
         [Header("References")]
@@ -272,7 +273,7 @@ namespace HappyBat
             switch (workOutType)
             {
                 case WorkOutType.Legs:
-                    if (currentLegsPointsPercent == 1)
+                    if (currentLegsPointsPercent >= 0.93f)
                     {
                         workOutData.Finish(workOutType);
                     }
@@ -282,7 +283,7 @@ namespace HappyBat
                     }
                     break;
                 case WorkOutType.LeftHand:
-                    if (currentLeftHandPercent == 1)
+                    if (currentLeftHandPercent >= 0.93f)
                     {
                         workOutData.Finish(workOutType);
                     }
@@ -293,7 +294,7 @@ namespace HappyBat
                     break;
 
                 case WorkOutType.RightHand:
-                    if (currentRightHandPercent == 1)
+                    if (currentRightHandPercent >= 0.93f)
                     {
                         workOutData.Finish(workOutType);
                     }
@@ -304,7 +305,7 @@ namespace HappyBat
 
                     break;
                 case WorkOutType.Stamina:
-                    if (currentStaminaPercent == 1)
+                    if (currentStaminaPercent >= 0.93f)
                     {
                         workOutData.Finish(workOutType);
                         _isWorkingOut = false;
@@ -315,7 +316,7 @@ namespace HappyBat
                     }
                     break;
                 case WorkOutType.Health:
-                    if(currentHealthPercent == 1)
+                    if(currentHealthPercent >= 0.93f)
                     {
                         workOutData.Finish(workOutType);
                     }

@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 7829669851425317311}
   m_Layer: 0
   m_Name: Pressi
-  m_TagString: Untagged
+  m_TagString: WorkOutMachine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

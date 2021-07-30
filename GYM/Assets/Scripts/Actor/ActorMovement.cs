@@ -1,97 +1,159 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ActorMovement : MonoBehaviour
+namespace HappyBat
 {
-    Vector3 _inputValue;
-    float inputSqrMagnitude;
-    public float speed;
-    NavMeshAgent _navMeshAgent;
-    CapsuleCollider _capsuleCollider;
-
-    [SerializeField] DynamicJoystick _dynamicJoystick;
-
-    public bool isMoving { get; private set; }
-    bool _shouldMove = true;
-    // Start is called before the first frame update
-    void Start()
+    public class ActorMovement : MonoBehaviour
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _capsuleCollider = GetComponent<CapsuleCollider>();
-    }
+        [Header("References")]
+        [SerializeField] DynamicJoystick _dynamicJoystick;
+        [Header("Values")]
+        [SerializeField] float _speed; // ser fild
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_shouldMove)
+
+        Vector3 _inputValue;
+        NavMeshAgent _navMeshAgent;
+        CapsuleCollider _capsuleCollider;
+        Actor _actor;
+
+        bool _shouldMove = true;
+
+        float inputSqrMagnitude;
+
+        public bool isMoving { get; private set; }
+        // Start is called before the first frame update
+
+        #region BOTH
+        void Start()
         {
-            CheckInput();
-            Move();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _capsuleCollider = GetComponent<CapsuleCollider>();
+            _actor = GetComponent<Actor>();
         }
-    }
-    public void SitOnGymMachine()
-    {
 
-        _navMeshAgent.enabled = false;
-        _capsuleCollider.enabled = false;
-        _shouldMove = false;
-    }
-    public void SitUpFromGymMachine(Vector3 newPos)
-    {
-        _navMeshAgent.enabled = true;
-        _capsuleCollider.enabled = true;
-        var t= _navMeshAgent.Warp(newPos);
-        _shouldMove = true;
-    }
-    void CheckInput()
-    {
-        //_inputValue.x = Input.GetAxis("Horizontal");
-        //_inputValue.z = Input.GetAxis("Vertical");
-        _inputValue.x = _dynamicJoystick.Direction.x;
-        _inputValue.z = _dynamicJoystick.Direction.y;
-    }
-    void LookAtMovingDir(Vector3 dir)
-    {
-        transform.rotation = Quaternion.LookRotation(dir);
-    }
-    void Move()
-    {
-        inputSqrMagnitude = _inputValue.sqrMagnitude;
-
-        if (inputSqrMagnitude >= .01f)
+        // Update is called once per frame
+        void Update()
         {
-            // move relative to camera
-            var forward = Camera.main.transform.forward;
-            var right = Camera.main.transform.right;
-
-            forward.y = 0;
-            right.y = 0;
-            forward.Normalize();
-            right.Normalize();
-
-            var desiredDir = forward * _inputValue.z + right * _inputValue.x;
-            // move relative to camera
-            LookAtMovingDir(desiredDir);
-
-            Vector3 newPos = transform.position + desiredDir * Time.deltaTime * speed;
-            NavMeshHit hit;
-            bool isValid = NavMesh.SamplePosition(newPos, out hit, 5f, NavMesh.AllAreas);
-
-            if (isValid)
+            if (_shouldMove)
             {
-                if ((transform.position - hit.position).magnitude >= 0.2f)
+                if (_actor.isPlayer)
                 {
-                    _navMeshAgent.Move(desiredDir * speed * Time.deltaTime);
-                    isMoving = true;
+                    CheckInput();
+                    MovePlayer();
+                }
+                else
+                {
+                    if (_navMeshAgent.velocity.magnitude < 0.2f)
+                    {
+                        MoveAI();
+                    }
                 }
             }
         }
-        else
+        public void SitOnGymMachine()
         {
-            isMoving = false;
+            _navMeshAgent.enabled = false;
+            _capsuleCollider.enabled = false;
+            _shouldMove = false;
         }
+        public void SitUpFromGymMachine(Vector3 newPos)
+        {
+            _navMeshAgent.enabled = true;
+            _capsuleCollider.enabled = true;
+            var t = _navMeshAgent.Warp(newPos);
+            _shouldMove = true;
+        }
+
+        #endregion
+
+        #region Player
+        void LookAtMovingDir(Vector3 dir)
+        {
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
+        void CheckInput()
+        {
+            //_inputValue.x = Input.GetAxis("Horizontal");
+            //_inputValue.z = Input.GetAxis("Vertical");
+            _inputValue.x = _dynamicJoystick.Direction.x;
+            _inputValue.z = _dynamicJoystick.Direction.y;
+        }
+        void MovePlayer()
+        {
+            inputSqrMagnitude = _inputValue.sqrMagnitude;
+
+            if (inputSqrMagnitude >= .01f)
+            {
+                // move relative to camera
+                var forward = Camera.main.transform.forward;
+                var right = Camera.main.transform.right;
+
+                forward.y = 0;
+                right.y = 0;
+                forward.Normalize();
+                right.Normalize();
+
+                var desiredDir = forward * _inputValue.z + right * _inputValue.x;
+                // move relative to camera
+                LookAtMovingDir(desiredDir);
+
+                Vector3 newPos = transform.position + desiredDir * Time.deltaTime * _speed;
+                NavMeshHit hit;
+                bool isValid = NavMesh.SamplePosition(newPos, out hit, 5f, NavMesh.AllAreas);
+
+                if (isValid)
+                {
+                    if ((transform.position - hit.position).magnitude >= 0.2f)
+                    {
+                        _navMeshAgent.Move(desiredDir * _speed * Time.deltaTime);
+                        isMoving = true;
+                    }
+                }
+            }
+            else
+            {
+                isMoving = false;
+            }
+        }
+
+        #endregion
+
+        #region AI
+
+        void MoveAI()
+        {
+            RandomizeWayPoint();
+
+            var wayPoint = RandomizeWayPoint();
+
+            if (wayPoint.CompareTag("WorkOutMachine"))
+            {
+                var gymMachine = wayPoint.GetComponentInChildren<GymMachine>();
+
+                if (gymMachine != null && gymMachine.amIAvailable)
+                {
+                    _navMeshAgent.SetDestination(wayPoint.position);
+                }
+            }
+            else
+            {
+                _navMeshAgent.SetDestination(wayPoint.position);
+                //   RandomizeGymMachineToGo(); // ??
+            }
+            isMoving = true;
+        }
+        Transform RandomizeWayPoint()
+        {
+            // BOT ONLY
+             var wayPoints = WayPointsManager.instance.wayPoints;
+
+             var randID = Random.Range(0, wayPoints.Length); // es sheidzleba singletonshi gavides
+
+             return wayPoints[randID];
+        }
+
+        #endregion
+
     }
-    
+
 }

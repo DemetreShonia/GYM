@@ -36,6 +36,11 @@ namespace HappyBat
             if(gameObject.activeSelf && this.enabled)
                 StartCoroutine(ResetEveryThing(.2f)); // 1 wami moicdis
         }
+        public override void SitOn()
+        {
+            RandomizeTargetPos();
+            _shouldMove = true;
+        }
 
         void Update()
         {
