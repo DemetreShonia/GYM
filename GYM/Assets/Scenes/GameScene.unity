@@ -958,7 +958,7 @@ RectTransform:
   - {fileID: 1621173212}
   - {fileID: 1726634962}
   m_Father: {fileID: 1105082265}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gymMachine: {fileID: 1800907239643027101}
-  rewardAmount: 5
+  rewardAmount: 300
   _maxValue: 5000
   _increaseStep: 800
   _decreaseAmount: 3000
@@ -1065,6 +1065,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573379562}
+  m_CullTransparentMesh: 1
+--- !u!1 &575056134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575056135}
+  - component: {fileID: 575056137}
+  - component: {fileID: 575056136}
+  m_Layer: 5
+  m_Name: FinishedText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &575056135
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575056134}
+  m_LocalRotation: {x: -0.0000007301568, y: -0.0000015199182, z: 0.00000004470348, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -110}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1105082265}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -106}
+  m_SizeDelta: {x: 224.04, y: 220.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &575056136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575056134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0.010436535, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 148
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: FINISHED
+--- !u!222 &575056137
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575056134}
   m_CullTransparentMesh: 1
 --- !u!1 &637616311
 GameObject:
@@ -1820,16 +1899,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105082261}
   m_LocalRotation: {x: 0.27059805, y: 0.6532815, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0, y: 0, z: 0.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
+  - {fileID: 575056135}
   - {fileID: 564923129}
   m_Father: {fileID: 1035028206026713629}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.51, y: 1.51}
+  m_AnchoredPosition: {x: 1.47, y: 1.47}
   m_SizeDelta: {x: 962.60535, y: 1711.2983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1246157288
@@ -2270,14 +2350,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gymSlider: {fileID: 564923130}
-  maxLegsPoints: 100
-  maxHandPoints: 100
-  maxStaminaPoints: 2000
-  maxHealthPoints: 100
   legsPercentImage: {fileID: 0}
   handPercentImage: {fileID: 0}
   staminaPercentImage: {fileID: 742486596}
   healPercentImage: {fileID: 455001866}
+  maxLegsPoints: 100
+  maxHandPoints: 100
+  maxStaminaPoints: 2099
+  maxHealthPoints: 100
 --- !u!1 &1537419371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3283,12 +3363,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actorSitPosT: {fileID: 4836770369486593308}
   _actorStandPosT: {fileID: 7570774292611051031}
-  _workOutType: 3
   _stopWorkOutButton: {fileID: 498380371}
+  _finishedText: {fileID: 575056134}
   uiInputGO: {fileID: 0}
+  _workOutType: 3
+  _trainRewardMultiplier: 1
   currentActor: {fileID: 0}
   lastClickTime: 0
-  _trainRewardMultiplier: 1
 --- !u!4 &4836770369486593308
 Transform:
   m_ObjectHideFlags: 0
@@ -3442,42 +3523,6 @@ PrefabInstance:
     - target: {fileID: 857215065848550862, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_Name
       value: Pressi
-      objectReference: {fileID: 0}
-    - target: {fileID: 857215065848550862, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853095804108, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829669853098412282, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8801347285632284078, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: _stopWorkOutButton

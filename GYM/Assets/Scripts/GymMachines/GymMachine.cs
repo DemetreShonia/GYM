@@ -12,10 +12,13 @@ namespace HappyBat
         [Header("References")]
         [SerializeField] Transform _actorSitPosT;
         [SerializeField] Transform _actorStandPosT;
-        [SerializeField] WorkOutType _workOutType;
         [SerializeField] Button _stopWorkOutButton;
-
+        [SerializeField] GameObject _finishedText;
         [HideInInspector] public GameObject uiInputGO;
+
+        [Header("Values")]
+        [SerializeField] WorkOutType _workOutType;
+        [SerializeField] int _trainRewardMultiplier;
 
         bool _amIAvailable = true;
 
@@ -30,25 +33,28 @@ namespace HappyBat
         public Actor currentActor;
         [HideInInspector] public float lastClickTime;
 
-        [SerializeField] int _trainRewardMultiplier;
         private void Start()
         {
             uiInputGO.SetActive(false); // chaqres UI
         }
         public void SitActorOnMe(Actor actor)
         {
-            if(currentActor == null)
+            if (!actor.workOutData.HasFinished(_workOutType))
             {
-                currentActor = actor;
-                actor.SitOn(_actorSitPosT, workOutId);
-                uiInputGO.SetActive(true); // gamochndes UI
-                uiInputGO.GetComponent<GymUiBase>().Reset();
-                IAmUnAvailable();
+                if (currentActor == null)
+                {
+                    currentActor = actor;
+                    actor.SitOn(_actorSitPosT, workOutId);
+                    uiInputGO.SetActive(true); // gamochndes UI
+                    uiInputGO.GetComponent<GymUiBase>().Reset();
+                    IAmUnAvailable();
 
-                _stopWorkOutButton.gameObject.SetActive(true);
-                _stopWorkOutButton.onClick.AddListener(StopWorkout);
-
+                    _stopWorkOutButton.gameObject.SetActive(true);
+                    _stopWorkOutButton.onClick.AddListener(StopWorkout);
+                }
             }
+           
+            
             
         }
         
@@ -77,7 +83,19 @@ namespace HappyBat
         }
         public virtual void Train(int reward)
         {
-            currentActor.WorkOut(_workOutType, reward * _trainRewardMultiplier);
+            if(currentActor != null)
+            {
+                if (currentActor.workOutData.HasFinished(_workOutType))
+                {
+                    StopWorkout();
+                    _finishedText.SetActive(true); // NOTE, THIS FINISH TEXT IS SHOWN TO ALL PLAYERS // WORKS FOR BOTS ONLY
+                }
+                else
+                {
+                    currentActor.WorkOut(_workOutType, reward * _trainRewardMultiplier);
+                }
+            }
+
         }
         public virtual void OnTriggerEnter(Collider other)
         {

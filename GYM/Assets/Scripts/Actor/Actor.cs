@@ -5,24 +5,78 @@ using UnityEngine.UI;
 
 namespace HappyBat
 {
+    public class WorkOutData
+    {
+        bool _isFinishedLeftHand;
+        bool _isFinishedRightHand;
+        bool _isFinishedLegs;
+        bool _isFinishedStamina;
+        bool _isFinishedHealth;
+        public bool HasFinished(WorkOutType workOutType)
+        {
+            switch (workOutType)
+            {
+                case WorkOutType.Legs:
+                    return _isFinishedLegs;
+                case WorkOutType.LeftHand:
+                    return _isFinishedLeftHand;
+                case WorkOutType.RightHand:
+                    return _isFinishedRightHand;
+                case WorkOutType.Stamina:
+                    return _isFinishedStamina;
+                case WorkOutType.Health:
+                    return _isFinishedHealth;
+                default:
+                    return false;
+            }
+        }
+        public void Finish (WorkOutType workOutType)
+        {
+            switch (workOutType)
+            {
+                case WorkOutType.Legs:
+                    _isFinishedLegs = true;
+                    break;
+                case WorkOutType.LeftHand:
+                    _isFinishedLeftHand = true;
+                    break;
+                case WorkOutType.RightHand:
+                    _isFinishedRightHand = true;
+                    break;
+                case WorkOutType.Stamina:
+                    _isFinishedStamina = true;
+                    break;
+                case WorkOutType.Health:
+                    _isFinishedHealth = true;
+                    break;
+            }
+        }
+    }
+
     public class Actor : MonoBehaviour
     {
         ActorAnimator _actorAnimator;
         ActorMovement _actorMovement;
 
-        [SerializeField] GymSlider _gymSlider;
+
+        public WorkOutData workOutData = new WorkOutData(); // new?
 
         #region Points
+        [Header("References")]
+        [SerializeField] GymSlider _gymSlider;
+
+        [SerializeField] Image legsPercentImage;
+        [SerializeField] Image handPercentImage;
+        [SerializeField] Image staminaPercentImage;
+        [SerializeField] Image healPercentImage;
+
+        [Header("Values")]
 
         [SerializeField] float maxLegsPoints;
         [SerializeField] float maxHandPoints;
         [SerializeField] float maxStaminaPoints;
         [SerializeField] float maxHealthPoints;
 
-        [SerializeField] Image legsPercentImage;
-        [SerializeField] Image handPercentImage;
-        [SerializeField] Image staminaPercentImage;
-        [SerializeField] Image healPercentImage;
 
         float _legsPoints; // SPEED
         float _leftHandPoints; // POWER
@@ -218,22 +272,61 @@ namespace HappyBat
             switch (workOutType)
             {
                 case WorkOutType.Legs:
-                    legsPoints += amount;
+                    if (currentLegsPointsPercent == 1)
+                    {
+                        workOutData.Finish(workOutType);
+                    }
+                    else
+                    {
+                        legsPoints += amount;
+                    }
                     break;
                 case WorkOutType.LeftHand:
-                    leftHandPoints += amount;
+                    if (currentLeftHandPercent == 1)
+                    {
+                        workOutData.Finish(workOutType);
+                    }
+                    else
+                    {
+                        leftHandPoints += amount;
+                    }
                     break;
+
                 case WorkOutType.RightHand:
-                    rightHandPoints += amount;
+                    if (currentRightHandPercent == 1)
+                    {
+                        workOutData.Finish(workOutType);
+                    }
+                    else
+                    {
+                        rightHandPoints += amount;
+                    }
+
                     break;
                 case WorkOutType.Stamina:
-                    // 
+                    if (currentStaminaPercent == 1)
+                    {
+                        workOutData.Finish(workOutType);
+                        _isWorkingOut = false;
+                    }
+                    else
+                    {
+                        _rewardAmount = amount;
+                    }
                     break;
                 case WorkOutType.Health:
-                    healthPoints += amount;
-                    _actorAnimator.WorkOut();
-                    healPercentImage.fillAmount = currentHealthPercent;
-                    print(healthPoints);
+                    if(currentHealthPercent == 1)
+                    {
+                        workOutData.Finish(workOutType);
+                    }
+                    else
+                    {
+                        healthPoints += amount;
+                        _actorAnimator.WorkOut();
+                        healPercentImage.fillAmount = currentHealthPercent;
+                        print(healthPoints);
+                    }
+                    
                     break;
             }
         }
@@ -252,6 +345,9 @@ namespace HappyBat
                 switch (_workOutType)
                 {
                     case WorkOutType.Stamina:
+                        if (workOutData.HasFinished(_workOutType))
+                            return;
+
                         UpdateStaminaWorkOut();
                         break;
                 }
@@ -260,15 +356,19 @@ namespace HappyBat
         }
         void UpdateStaminaWorkOut()
         {
-            float animPercent = _gymSlider.imagePercent;
+            float runPercent = _gymSlider.imagePercent;
 
-            _actorAnimator.WorkOutWithSlider(animPercent);
+            _actorAnimator.WorkOutWithSlider(runPercent);
+           // print(_rewardAmount * runPercent) ;
+
             _timer += Time.deltaTime;
 
             if (_timer > _maxTime)
             {
-                staminaPoints += _rewardAmount;
-                print(_rewardAmount);
+
+                staminaPoints += _rewardAmount * runPercent;
+
+                print(staminaPoints);
                 staminaPercentImage.fillAmount = currentStaminaPercent;
                 _timer = 0;
             }

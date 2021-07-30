@@ -50,7 +50,7 @@ namespace HappyBat
             {
                 _currentSliderPoints += _increaseStep;
 
-                _gymMachine.Train(CalculateWorkOutReward());
+                _gymMachine.Train(rewardAmount);
             }
         }
         void CalculateCurrentSliderPoints()
