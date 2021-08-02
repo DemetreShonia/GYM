@@ -46,12 +46,24 @@ namespace HappyBat
                 {
                     currentActor = actor;
                     actor.SitOn(_actorSitPosT, workOutId);
-                    uiInputGO.SetActive(true); // gamochndes UI
-                    uiInputGO.GetComponent<GymUiBase>().SitOn();
+
+                    if (currentActor.isPlayer)
+                    {
+                        uiInputGO.SetActive(true); // gamochndes UI
+                        uiInputGO.GetComponent<GymUiBase>().SitOn();
+                        _stopWorkOutButton.gameObject.SetActive(true);
+                        _stopWorkOutButton.onClick.AddListener(StopWorkout);
+                    }
+                    else
+                    {
+                        var __actorAi = currentActor.GetComponent<ActorAI>();
+                        StartCoroutine(__actorAi.StartWorkOutCo(_workOutType, 0.5f));
+                    }
+                    
+                    
                     IAmUnAvailable();
 
-                    _stopWorkOutButton.gameObject.SetActive(true);
-                    _stopWorkOutButton.onClick.AddListener(StopWorkout);
+                    
                 }
             }
            
@@ -63,13 +75,23 @@ namespace HappyBat
         {
             if(currentActor != null)
             {
+                
+                if (currentActor.isPlayer)
+                {
+                    //     uiInputGO.GetComponent<GymUiBase>().Reset();
+                    uiInputGO.SetActive(false); // chaqres UI
+
+                    _stopWorkOutButton.onClick.RemoveListener(StopWorkout);
+                    _stopWorkOutButton.gameObject.SetActive(false);
+                }
+                else
+                {
+                    currentActor.GetComponent<ActorAI>().StopAIWorkOut();
+                }
+
                 currentActor.StandUp(_actorStandPosT.position);
                 currentActor = null;
-           //     uiInputGO.GetComponent<GymUiBase>().Reset();
-                uiInputGO.SetActive(false); // chaqres UI
-
-                _stopWorkOutButton.onClick.RemoveListener(StopWorkout);
-                _stopWorkOutButton.gameObject.SetActive(false);
+                
                 Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
             }
             

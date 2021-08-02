@@ -357,7 +357,15 @@ namespace HappyBat
         }
         void UpdateStaminaWorkOut()
         {
-            float runPercent = _gymSlider.imagePercent;
+            float runPercent;
+            if (isPlayer)
+            {
+                runPercent = _gymSlider.imagePercent;
+            }
+            else
+            {
+                runPercent = .5f;
+            }
 
             _actorAnimator.WorkOutWithSlider(runPercent);
            // print(_rewardAmount * runPercent) ;
