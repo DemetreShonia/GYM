@@ -50,13 +50,20 @@ namespace HappyBat
                 }
             }
         }
-        public void SitOnGymMachine()
+        public void SitOnSlotMachine()
         {
             _navMeshAgent.enabled = false;
             _capsuleCollider.enabled = false;
             _shouldMove = false;
         }
         public void SitUpFromGymMachine(Vector3 newPos)
+        {
+            _navMeshAgent.enabled = true;
+            _capsuleCollider.enabled = true;
+            var t = _navMeshAgent.Warp(newPos);
+            _shouldMove = true;
+        }
+        public void StandUpFromSlotMachine(Vector3 newPos)
         {
             _navMeshAgent.enabled = true;
             _capsuleCollider.enabled = true;

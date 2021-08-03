@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - WorkOutMachine
+  - Actor
   layers:
   - Default
   - TransparentFX

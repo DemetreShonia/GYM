@@ -54,8 +54,12 @@ namespace HappyBat
         }
         public void RollDice()
         {
-            _diceRb.AddForce(Random.insideUnitSphere * _kickForce, ForceMode.Impulse);
-            _diceRb.AddTorque(Random.insideUnitSphere * _kickForce, ForceMode.Impulse);
+
+            //_diceRb.AddForce((Random.insideUnitSphere.normalized + Vector3.up) * _kickForce, ForceMode.Impulse);
+            //_diceRb.AddTorque((Random.insideUnitSphere.normalized + Vector3.up) * _kickForce, ForceMode.Impulse);
+            
+            _diceRb.AddForce(( Vector3.up) * _kickForce, ForceMode.Impulse);
+            _diceRb.AddTorque((Random.insideUnitSphere) * _kickForce, ForceMode.Impulse);
             isRolling = true;
             StartCoroutine(RollDiceCo());
         }

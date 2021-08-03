@@ -10,7 +10,12 @@ namespace HappyBat
         [SerializeField] Dice[] dices;
 
         public List<int> diceScores = new List<int>();
-        
+
+        [SerializeField] int _diceAmount;
+
+        Actor _currentActor;
+        bool _isMachineAvailable = true;
+
         // jer ert kamatelze vqnat
         
         void Start()
@@ -18,10 +23,21 @@ namespace HappyBat
             RollDices();
         }
 
+        public void SitActorOnMe(Actor _actor)
+        {
+            _currentActor = _actor;
+            _isMachineAvailable = false;
+        }
+        public void StandDownFromSlotMachine()
+        {
+           // _currentActor.StandUp()
+            _currentActor = null;
+            _isMachineAvailable = true;
+        }
         // Update is called once per frame
         void Update()
         {
-            if (diceScores.Count == 2) // es 2 damokidebulia kamatlebis odenobaze
+            if (diceScores.Count == _diceAmount) // es 2 damokidebulia kamatlebis odenobaze
             {
                 for (int i = 0; i < diceScores.Count; i++)
                 {
@@ -44,6 +60,16 @@ namespace HappyBat
             }
         }
         
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Actor"))
+            {
+                var actor = other.GetComponent<Actor>();
+                SitActorOnMe(actor);
+                actor.SitOnSlotMachine();
+            }
+        }
+
     }
 
 }

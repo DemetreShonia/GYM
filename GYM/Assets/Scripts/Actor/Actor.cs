@@ -231,13 +231,17 @@ namespace HappyBat
         {
             // aq animacia unda gaeshvas romeli?
             // jdomis poza ra
-            _actorMovement.SitOnGymMachine();
+            _actorMovement.SitOnSlotMachine();
             _actorAnimator.PrepareForWorkOut(workOutId);
 
             transform.position = gymMachineT.position;
             transform.rotation = gymMachineT.rotation;
             transform.SetParent(gymMachineT);
 
+        }
+        public void SitOnSlotMachine()
+        {
+            _actorMovement.SitOnSlotMachine();
         }
         void SetFillAmountsToZero()
         {
