@@ -8,15 +8,15 @@ namespace HappyBat
     {
         Actor _actor;
         
-        public IEnumerator StartWorkOutCo(WorkOutType workOutType, float delayBetweenAutoWorkOut)
-        {
+        //public IEnumerator StartWorkOutCo(WorkOutType workOutType, float delayBetweenAutoWorkOut)
+        //{
 
-            while (true)
-            {
-                yield return new WaitForSeconds(delayBetweenAutoWorkOut);
-                _actor.WorkOut(workOutType, 10); // 10 for test
-            }
-        }
+        //    while (true)
+        //    {
+        //        yield return new WaitForSeconds(delayBetweenAutoWorkOut);
+        //        _actor.WorkOut(workOutType, 10); // 10 for test
+        //    }
+        //}
         public void StopAIWorkOut()
         {
             StopAllCoroutines();

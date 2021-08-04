@@ -45,7 +45,7 @@ namespace HappyBat
                 if (currentActor == null)
                 {
                     currentActor = actor;
-                    actor.SitOn(_actorSitPosT, workOutId);
+                  //  actor.SitOn(_actorSitPosT, workOutId);
 
                     if (currentActor.isPlayer)
                     {
@@ -57,9 +57,8 @@ namespace HappyBat
                     else
                     {
                         var __actorAi = currentActor.GetComponent<ActorAI>();
-                        StartCoroutine(__actorAi.StartWorkOutCo(_workOutType, 0.5f));
+                        //StartCoroutine(__actorAi.StartWorkOutCo(_workOutType, 0.5f));
                     }
-                    
                     
                     IAmUnAvailable();
 
@@ -73,7 +72,7 @@ namespace HappyBat
         
         public void StopWorkout()
         {
-            if(currentActor != null)
+            if (currentActor != null)
             {
                 
                 if (currentActor.isPlayer)
@@ -89,7 +88,7 @@ namespace HappyBat
                     currentActor.GetComponent<ActorAI>().StopAIWorkOut();
                 }
 
-                currentActor.StandUp(_actorStandPosT.position);
+               // currentActor.StandUp(_actorStandPosT.position);
                 currentActor = null;
                 
                 Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
@@ -115,7 +114,7 @@ namespace HappyBat
                 }
                 else
                 {
-                    currentActor.WorkOut(_workOutType, reward * _trainRewardMultiplier);
+                   // currentActor.WorkOut(_workOutType, reward * _trainRewardMultiplier);
                 }
             }
 

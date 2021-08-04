@@ -58,6 +58,8 @@ namespace HappyBat
         ActorAnimator _actorAnimator;
         ActorMovement _actorMovement;
 
+        
+
 
         public WorkOutData workOutData = new WorkOutData(); // new?
         public bool isPlayer;
@@ -227,33 +229,30 @@ namespace HappyBat
             _actorMovement = GetComponent<ActorMovement>();
             SetFillAmountsToZero();
         }
-        public void SitOn(Transform gymMachineT, int workOutId)
-        {
-            // aq animacia unda gaeshvas romeli?
-            // jdomis poza ra
-            _actorMovement.SitOnSlotMachine();
-            _actorAnimator.PrepareForWorkOut(workOutId);
+        
+        //public void SitOn(Transform gymMachineT, int workOutId)
+        //{
+        //    // aq animacia unda gaeshvas romeli?
+        //    // jdomis poza ra
+        //    _actorMovement.SitOnSlotMachine();
+        //    _actorAnimator.PrepareForWorkOut(workOutId);
 
-            transform.position = gymMachineT.position;
-            transform.rotation = gymMachineT.rotation;
-            transform.SetParent(gymMachineT);
+        //    transform.position = gymMachineT.position;
+        //    transform.rotation = gymMachineT.rotation;
+        //    transform.SetParent(gymMachineT);
 
-        }
+        //}
         public void SitOnSlotMachine()
         {
             _actorMovement.SitOnSlotMachine();
         }
         void SetFillAmountsToZero()
         {
-           //legsPercentImage.fillAmount = 0;
-          //  handPercentImage.fillAmount = 0;
             staminaPercentImage.fillAmount = 0;
             healPercentImage.fillAmount = 0;
         }
         public void StandUp(Vector3 newPos)
         {
-            _isWorkingOut = false;
-            transform.SetParent(null);
            // transform.position = position;
 
             _actorMovement.enabled = true;
@@ -261,131 +260,132 @@ namespace HappyBat
             _actorAnimator.StopWorkOut();
 
             //  _actorMovement.SitUpFromGymMachine(newPos);
-            _actorMovement.SitUpFromGymMachine(newPos);
+            //_actorMovement.SitUpFromGymMachine(newPos);
+           // _actorMovement.StandUpFromSlotMachine(newPos);
 
             _actorAnimator.WorkOutWithSlider(0f);
 
         }
-        public void WorkOut(WorkOutType workOutType, int amount)
-        {
+        //public void WorkOut(WorkOutType workOutType, int amount)
+        //{
             
-            _isWorkingOut = true;
-            _workOutType = workOutType;
-            _rewardAmount = amount;
+        //    _isWorkingOut = true;
+        //    _workOutType = workOutType;
+        //    _rewardAmount = amount;
 
 
-            switch (workOutType)
-            {
-                case WorkOutType.Legs:
-                    if (currentLegsPointsPercent >= 0.93f)
-                    {
-                        workOutData.Finish(workOutType);
-                    }
-                    else
-                    {
-                        legsPoints += amount;
-                    }
-                    break;
-                case WorkOutType.LeftHand:
-                    if (currentLeftHandPercent >= 0.93f)
-                    {
-                        workOutData.Finish(workOutType);
-                    }
-                    else
-                    {
-                        leftHandPoints += amount;
-                    }
-                    break;
+        //    switch (workOutType)
+        //    {
+        //        case WorkOutType.Legs:
+        //            if (currentLegsPointsPercent >= 0.93f)
+        //            {
+        //                workOutData.Finish(workOutType);
+        //            }
+        //            else
+        //            {
+        //                legsPoints += amount;
+        //            }
+        //            break;
+        //        case WorkOutType.LeftHand:
+        //            if (currentLeftHandPercent >= 0.93f)
+        //            {
+        //                workOutData.Finish(workOutType);
+        //            }
+        //            else
+        //            {
+        //                leftHandPoints += amount;
+        //            }
+        //            break;
 
-                case WorkOutType.RightHand:
-                    if (currentRightHandPercent >= 0.93f)
-                    {
-                        workOutData.Finish(workOutType);
-                    }
-                    else
-                    {
-                        rightHandPoints += amount;
-                    }
+        //        case WorkOutType.RightHand:
+        //            if (currentRightHandPercent >= 0.93f)
+        //            {
+        //                workOutData.Finish(workOutType);
+        //            }
+        //            else
+        //            {
+        //                rightHandPoints += amount;
+        //            }
 
-                    break;
-                case WorkOutType.Stamina:
-                    if (currentStaminaPercent >= 0.93f)
-                    {
-                        workOutData.Finish(workOutType);
-                        _isWorkingOut = false;
-                    }
-                    else
-                    {
-                        _rewardAmount = amount;
-                    }
-                    break;
-                case WorkOutType.Health:
-                    if(currentHealthPercent >= 0.93f)
-                    {
-                        workOutData.Finish(workOutType);
-                    }
-                    else
-                    {
-                        healthPoints += amount;
-                        _actorAnimator.WorkOut();
-                        healPercentImage.fillAmount = currentHealthPercent;
-                        print(healthPoints);
-                    }
+        //            break;
+        //        case WorkOutType.Stamina:
+        //            if (currentStaminaPercent >= 0.93f)
+        //            {
+        //                workOutData.Finish(workOutType);
+        //                _isWorkingOut = false;
+        //            }
+        //            else
+        //            {
+        //                _rewardAmount = amount;
+        //            }
+        //            break;
+        //        case WorkOutType.Health:
+        //            if(currentHealthPercent >= 0.93f)
+        //            {
+        //                workOutData.Finish(workOutType);
+        //            }
+        //            else
+        //            {
+        //                healthPoints += amount;
+        //                _actorAnimator.WorkOut();
+        //                healPercentImage.fillAmount = currentHealthPercent;
+        //                print(healthPoints);
+        //            }
                     
-                    break;
-            }
-        }
+        //            break;
+        //    }
+        //}
 
 
-        int _rewardAmount;
-        bool _isWorkingOut = true;
-        WorkOutType _workOutType;
-        float _timer;
-        float _maxTime = 1f;
+        //int _rewardAmount;
+        //bool _isWorkingOut = true;
+        //WorkOutType _workOutType;
+        //float _timer;
+        //float _maxTime = 1f;
 
-        private void Update()
-        {
-            if (_isWorkingOut)
-            {
-                switch (_workOutType)
-                {
-                    case WorkOutType.Stamina:
-                        if (workOutData.HasFinished(_workOutType))
-                            return;
+        //private void Update()
+        //{
+        //    if (_isWorkingOut)
+        //    {
+        //        switch (_workOutType)
+        //        {
+        //            case WorkOutType.Stamina:
+        //                if (workOutData.HasFinished(_workOutType))
+        //                    return;
 
-                        UpdateStaminaWorkOut();
-                        break;
-                }
+        //                UpdateStaminaWorkOut();
+        //                break;
+        //        }
                 
-            }
-        }
-        void UpdateStaminaWorkOut()
-        {
-            float runPercent;
-            if (isPlayer)
-            {
-                runPercent = _gymSlider.imagePercent;
-            }
-            else
-            {
-                runPercent = .5f;
-            }
+        //    }
+        //}
+        //void UpdateStaminaWorkOut()
+        //{
+        //    float runPercent;
+        //    if (isPlayer)
+        //    {
+        //        runPercent = _gymSlider.imagePercent;
+        //    }
+        //    else
+        //    {
+        //        runPercent = .5f;
+        //    }
 
-            _actorAnimator.WorkOutWithSlider(runPercent);
-           // print(_rewardAmount * runPercent) ;
+        //    _actorAnimator.WorkOutWithSlider(runPercent);
+        //   // print(_rewardAmount * runPercent) ;
 
-            _timer += Time.deltaTime;
+        //    _timer += Time.deltaTime;
 
-            if (_timer > _maxTime)
-            {
+        //    if (_timer > _maxTime)
+        //    {
 
-                staminaPoints += _rewardAmount * runPercent;
+        //        staminaPoints += _rewardAmount * runPercent;
 
-                print(staminaPoints);
-                staminaPercentImage.fillAmount = currentStaminaPercent;
-                _timer = 0;
-            }
-        }
+        //        print(staminaPoints);
+        //        staminaPercentImage.fillAmount = currentStaminaPercent;
+        //        _timer = 0;
+        //    }
+        //}
     }
 
 }

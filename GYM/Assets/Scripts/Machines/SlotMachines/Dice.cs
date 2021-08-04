@@ -31,7 +31,7 @@ namespace HappyBat
         // Update is called once per frame
         IEnumerator RollDiceCo()
         {
-            yield return null;
+            yield return new WaitForSeconds(0.5f);
 
             while (isRolling)
             {
@@ -49,17 +49,18 @@ namespace HappyBat
                         break;
                     }
                 }
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
         }
         public void RollDice()
         {
-
             //_diceRb.AddForce((Random.insideUnitSphere.normalized + Vector3.up) * _kickForce, ForceMode.Impulse);
             //_diceRb.AddTorque((Random.insideUnitSphere.normalized + Vector3.up) * _kickForce, ForceMode.Impulse);
             
-            _diceRb.AddForce(( Vector3.up) * _kickForce, ForceMode.Impulse);
+            _diceRb.AddForce(Vector3.up * Random.Range(0.8f, 1.2f) * _kickForce, ForceMode.Impulse);
+
             _diceRb.AddTorque((Random.insideUnitSphere) * _kickForce, ForceMode.Impulse);
+
             isRolling = true;
             StartCoroutine(RollDiceCo());
         }

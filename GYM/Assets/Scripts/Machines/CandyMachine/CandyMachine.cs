@@ -4,23 +4,23 @@ using UnityEngine;
 
 namespace HappyBat
 {
-    public class CandyMachine : MonoBehaviour
+    public class CandyMachine : Singleton<CandyMachine>
     {
         [SerializeField] GameObject _candyPrefab;
         [SerializeField] Transform _candySpawnPosT;
+        [SerializeField] Transform _candyBounceSpawnPosT;
+        [SerializeField] int _candyAmountToBounce;
 
-        int _candyAmountToDrop;
 
-        public void DropCandy()
+        public void DropCandy(int amount)
         {
-            var candyGo = Instantiate(_candyPrefab, _candySpawnPosT.position, Quaternion.identity);
-            var candy = candyGo.GetComponent<Candy>();
+            for (int i = 0; i < amount; i++)
+            {
+                var uc = Random.insideUnitCircle;
 
-            candy.SetPrizeAmount(_candyAmountToDrop);
-        }
-        public void SetCandyAmountToDrop(int amount)
-        {
-            _candyAmountToDrop = amount;
+                Instantiate(_candyPrefab, _candySpawnPosT.position + new Vector3(uc.x, uc.y, 0), Quaternion.identity);
+            }
+            print(amount);
         }
     }
 }
