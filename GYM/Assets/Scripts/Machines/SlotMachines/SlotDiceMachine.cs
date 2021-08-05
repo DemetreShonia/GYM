@@ -56,7 +56,6 @@ namespace HappyBat
                     //StartCoroutine(__actorAi.StartWorkOutCo(_workOutType, 0.5f));
                 }
             }
-            _isMachineAvailable = false;
 
         }
         public void StandUpFromSlotMachine()
@@ -83,7 +82,6 @@ namespace HappyBat
                 //_currentActor.StandUp(_standUpPosT.position);
 
                 _currentActor = null;
-                _isMachineAvailable = true;
 
                // Invoke("IAmAvailable", 1); // trigershi ro ar gaixlartos
             }

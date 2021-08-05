@@ -181,7 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 88c0aaf9d2eff394cb21296968074faa, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -732,7 +732,7 @@ TextMesh:
   m_FontSize: 500
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -755,7 +755,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -927,7 +927,7 @@ TextMesh:
   m_FontSize: 500
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -950,7 +950,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2315,7 +2315,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -3588,7 +3588,7 @@ GameObject:
   - component: {fileID: 1427958039}
   - component: {fileID: 1427958038}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: STAND TEXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3626,7 +3626,7 @@ TextMesh:
   m_FontSize: 500
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190335
@@ -3649,7 +3649,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3826,7 +3826,7 @@ TextMesh:
   m_FontSize: 500
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3849,7 +3849,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10025,6 +10025,7 @@ MonoBehaviour:
   _standPosT: {fileID: 1893727109}
   _standUpPosT: {fileID: 527101459}
   _diceTexts: {fileID: 1910154074}
+  _triggerTransform: {fileID: 908106454}
 --- !u!54 &919132148341574086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10432,6 +10433,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -450
       objectReference: {fileID: 0}
+    - target: {fileID: 7122142773749197480, guid: efe9d0ca2a8d00a4cb53c087e13cb626, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
     - target: {fileID: 7122142774328505400, guid: efe9d0ca2a8d00a4cb53c087e13cb626, type: 3}
       propertyPath: m_Camera
       value: 
@@ -10446,7 +10451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7821564760177142205, guid: efe9d0ca2a8d00a4cb53c087e13cb626, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7821564760177142205, guid: efe9d0ca2a8d00a4cb53c087e13cb626, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10506,13 +10511,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 649150548}
     m_Modifications:
+    - target: {fileID: 1327772321, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a48b0ff595024cf439b4f84e47c7d285, type: 3}
     - target: {fileID: 587073646792577043, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 654956287}
     - target: {fileID: 857215065848550859, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 857215065848550859, guid: 15d06b7257f4be74c843564506d06d42, type: 3}
       propertyPath: m_LocalPosition.x
