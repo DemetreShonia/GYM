@@ -1194,6 +1194,7 @@ GameObject:
   - component: {fileID: 6740428371811247326}
   - component: {fileID: 6740428371811247313}
   - component: {fileID: 5771739207959094996}
+  - component: {fileID: 397849174}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Actor
@@ -1328,6 +1329,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c49c234d41fac459d1cab663bd795c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &397849174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740428371811247320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bba912200395744e9da29895db0887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxCandyAmount: 10
 --- !u!1 &6773220783979701701
 GameObject:
   m_ObjectHideFlags: 0

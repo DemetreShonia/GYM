@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HappyBat
 {
@@ -10,43 +11,68 @@ namespace HappyBat
 
         int _currentCandyAmount;
         [SerializeField] int _maxCandyAmount;
+        [SerializeField] Slider _skinnyIndicatorSlider;
+        [SerializeField] GameObject _maxText;
         float currentCandyPercent
         {
             get
             {
                 if (_maxCandyAmount != 0)
-                    return (float)(_currentCandyAmount) / _maxCandyAmount * 100;
+                {
+                    if (_currentCandyAmount == _maxCandyAmount)
+                    {
+                        _hasMaxCandy = true;
+                        _maxText.SetActive(true);
+                        return 100;
+
+                    }
+                    else
+                    {
+                        return (float)(_currentCandyAmount) / _maxCandyAmount * 100;
+                    }
+                }
+                
+
                 else
                     return 0;
             }
         }
+        bool _hasMaxCandy;
+
         private void Start()
         {
             _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
         private void Update()
         {
-            UpdateBlendShapes();
-            print(currentCandyPercent);
+            if (!_hasMaxCandy)
+            {
+                UpdateBlendShapes();
+                UpdateUI();
+            }
+            
         }
 
         void UpdateBlendShapes()
         {
             _skinnedMeshRenderer.SetBlendShapeWeight(0, currentCandyPercent);
         }
-        private void OnTriggerEnter(Collider other)
+        void UpdateUI()
         {
-            if (other.CompareTag("Candy"))
+            _skinnyIndicatorSlider.value = currentCandyPercent / 100f;
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Candy"))
             {
-                if(_currentCandyAmount < _maxCandyAmount)
+                if (_currentCandyAmount < _maxCandyAmount)
                 {
                     _currentCandyAmount++;
-                    Destroy(other.gameObject);
+                    Destroy(collision.gameObject);
                 }
-                
             }
         }
-        
+
     }
 }
 

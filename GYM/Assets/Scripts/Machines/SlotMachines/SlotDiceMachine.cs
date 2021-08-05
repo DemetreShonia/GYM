@@ -19,8 +19,10 @@ namespace HappyBat
         [SerializeField] Transform _standPosT;
         [SerializeField] Transform _standUpPosT;
 
+        [SerializeField] DiceTexts _diceTexts;
+        [SerializeField] Transform _triggerTransform;
+
         Actor _currentActor;
-        bool _isMachineAvailable = true;
 
         // jer ert kamatelze vqnat
         
@@ -97,13 +99,11 @@ namespace HappyBat
                 //{
                 //    print(diceScores[i]);
                 //}
+                ResetStandTrigger();
+                _diceTexts.ShowText(dices[0].currentScore, dices[1].currentScore);
                 CandyMachine.instance.DropCandy(CountScore());
                 _areDicesRolling = false;
                 diceScores.Clear();
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                RollDices();
             }
             
         }
@@ -134,13 +134,24 @@ namespace HappyBat
                 // var actor = other.GetComponent<Actor>();
                 // SitActorOnMe(actor);
                 // actor.SitOnSlotMachine();
+
                 if (!_areDicesRolling)
                 {
+                    StandOnTrigger();
                     RollDices();
                 }
             }
         }
-
+        void StandOnTrigger()
+        {
+            var scale = _triggerTransform.localScale;
+            _triggerTransform.localScale = new Vector3(scale.x, 0.1f, scale.z);
+        }
+        void ResetStandTrigger()
+        {
+            var scale = _triggerTransform.localScale;
+            _triggerTransform.localScale = new Vector3(scale.x, 0.2f, scale.z);
+        }
     }
 
 }

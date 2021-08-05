@@ -16,11 +16,10 @@ namespace HappyBat
         {
             for (int i = 0; i < amount; i++)
             {
-                var uc = Random.insideUnitCircle;
-
-                Instantiate(_candyPrefab, _candySpawnPosT.position + new Vector3(uc.x, uc.y, 0), Quaternion.identity);
+                GameObject candy = Instantiate(_candyPrefab, _candySpawnPosT.position + Random.insideUnitSphere, Quaternion.identity);
+                candy.transform.SetParent(transform.root);
+                Destroy(candy, Random.Range(8, 15));
             }
-            print(amount);
         }
     }
 }
