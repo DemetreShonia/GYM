@@ -97,14 +97,20 @@ namespace HappyBat
                 //{
                 //    print(diceScores[i]);
                 //}
-                ResetStandTrigger();
                 _diceTexts.ShowText(dices[0].currentScore, dices[1].currentScore);
-                CandyMachine.instance.DropCandy(CountScore());
-                _areDicesRolling = false;
+
+                _diceTexts.myDelegate += Function;  // bandzi saxelebia
                 diceScores.Clear();
+
             }
-            
         }
+        void Function() // bandzi saxelia mara ikos
+        {
+            ResetStandTrigger();
+
+            _areDicesRolling = false;
+        }
+
         int CountScore()
         {
             var sum = 0;

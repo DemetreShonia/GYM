@@ -6,7 +6,7 @@ namespace HappyBat
     public class ActorMovement : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] DynamicJoystick _dynamicJoystick;
+        [SerializeField] FloatingJoystick _dynamicJoystick;
         [Header("Values")]
         [SerializeField] float _speed; // ser fild
 

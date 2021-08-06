@@ -13,6 +13,7 @@ namespace HappyBat
         [SerializeField] int _maxCandyAmount;
         [SerializeField] Slider _skinnyIndicatorSlider;
         [SerializeField] GameObject _maxText;
+        [SerializeField] Transform _pivotTransform;
         float currentCandyPercent
         {
             get
@@ -23,12 +24,12 @@ namespace HappyBat
                     {
                         _hasMaxCandy = true;
                         _maxText.SetActive(true);
-                        return 100;
+                        return 200;
 
                     }
                     else
                     {
-                        return (float)(_currentCandyAmount) / _maxCandyAmount * 100;
+                        return (float)(_currentCandyAmount) / _maxCandyAmount * 200;
                     }
                 }
                 
@@ -50,9 +51,13 @@ namespace HappyBat
                 UpdateBlendShapes();
                 UpdateUI();
             }
+            UpdatePlayerScale();
             
         }
-
+        void UpdatePlayerScale()
+        {
+            _pivotTransform.localScale = Vector3.one + Vector3.one * (_currentCandyAmount / 10f);
+        }
         void UpdateBlendShapes()
         {
             _skinnedMeshRenderer.SetBlendShapeWeight(0, currentCandyPercent);
